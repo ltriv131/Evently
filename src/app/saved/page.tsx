@@ -1,14 +1,19 @@
 "use client";
 import Image from "next/image";
 import EventCard from "../components/EventCard";
-import { events } from "../data/events";
 import styles from "../css/EventsPage.module.css";
 import { useState } from "react";
 import { useSavedEvents } from "../hooks/useSavedEvents";
+import { useEventsByIds } from "../hooks/useEventsByIds";
 export default function FavoritesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
   const { savedIds, isSaved, toggleSaved, isLoaded } = useSavedEvents();
+  const {
+    events: savedEvents,
+    isLoading: eventsLoading,
+    error,
+  } = useEventsByIds(savedIds);
 
   const submitQuery = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevents page refresh
@@ -16,13 +21,13 @@ export default function FavoritesPage() {
     setSubmittedQuery(searchQuery.trim());
   };
 
-  const savedEvents = events.filter((event) => savedIds.includes(event.id));
-
   const filteredEvents = submittedQuery
     ? savedEvents.filter((event) =>
         event.title.toLowerCase().startsWith(submittedQuery.toLowerCase())
       )
     : savedEvents;
+
+  const ready = isLoaded && !eventsLoading;
 
   return (
     <div className={styles.page}>
@@ -58,11 +63,12 @@ export default function FavoritesPage() {
         </form>
       </div>
       <div className={styles.gridSection}>
-        {isLoaded && filteredEvents.length === 0 ? (
+        {error && <p>{error}</p>}
+        {ready && filteredEvents.length === 0 ? (
           <p>No saved events yet.</p>
         ) : (
           <div className={styles.grid}>
-            {isLoaded &&
+            {ready &&
               filteredEvents.map((event) => (
                 <EventCard
                   key={event.id}

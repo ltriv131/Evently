@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
 import EventCard from "../components/EventCard";
-import { events } from "../data/events";
 import styles from "../css/EventsPage.module.css";
 import { useSavedEvents } from "../hooks/useSavedEvents";
+import { useInfiniteEvents } from "../hooks/useInfiniteEvents";
 
 export default function EventsPage() {
   const { isSaved, toggleSaved } = useSavedEvents();
+  const { events, isLoading, error, sentinelRef } = useInfiniteEvents();
 
   return (
     <div className={styles.page}>
@@ -44,6 +45,9 @@ export default function EventsPage() {
             />
           ))}
         </div>
+        <div ref={sentinelRef} />
+        {isLoading && <p>Loading more events…</p>}
+        {error && <p>{error}</p>}
       </div>
     </div>
   );

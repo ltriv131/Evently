@@ -1,17 +1,24 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { events } from "../../data/events";
+import type { EventInfo } from "../../types/event";
 import styles from "../../css/EventDetailPage.module.css";
 
-export function generateStaticParams() {
-  return events.map((event) => ({ id: event.id }));
+async function getEvent(id: string): Promise<EventInfo | null> {
+  const apiUrl = process.env.EXPRESS_API_URL ?? "http://localhost:4000";
+  const res = await fetch(
+    `${apiUrl}/api/events?ids=${encodeURIComponent(id)}`,
+    { cache: "no-store" }
+  );
+  if (!res.ok) throw new Error("Failed to fetch event");
+  const data: { events: EventInfo[] } = await res.json();
+  return data.events[0] ?? null;
 }
 
 export default async function EventDetailPage(
   props: PageProps<"/events/[id]">
 ) {
   const { id } = await props.params;
-  const event = events.find((item) => item.id === id);
+  const event = await getEvent(id);
 
   if (!event) {
     notFound();
