@@ -17,7 +17,9 @@ export default function Navbar() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.row}>
-        <p className={styles.logo}>Evently</p>
+        <Link href="/" aria-label="Evently home">
+          <p className={styles.logo}>Evently</p>
+        </Link>
 
         <div className={styles.links}>
           {NAV_LINKS.map(({ href, label }) => {
@@ -38,7 +40,7 @@ export default function Navbar() {
         </div>
 
         <Link href="/saved" aria-label="Saved events" className={styles.savedLink}>
-          <Image src="/icons/bookmark.svg" alt="" width={18} height={18} />
+          <Image src="/icons/bookmark-light.svg" alt="" width={18} height={18} />
         </Link>
       </div>
 

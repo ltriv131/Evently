@@ -3,8 +3,11 @@ import Image from "next/image";
 import EventCard from "../components/EventCard";
 import { events } from "../data/events";
 import styles from "../css/EventsPage.module.css";
+import { useSavedEvents } from "../hooks/useSavedEvents";
 
 export default function EventsPage() {
+  const { isSaved, toggleSaved } = useSavedEvents();
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -33,7 +36,12 @@ export default function EventsPage() {
       <div className={styles.gridSection}>
         <div className={styles.grid}>
           {events.map((event) => (
-            <EventCard key={event.id} event={event} />
+            <EventCard
+              key={event.id}
+              event={event}
+              isSaved={isSaved(event.id)}
+              onToggleSave={toggleSaved}
+            />
           ))}
         </div>
       </div>

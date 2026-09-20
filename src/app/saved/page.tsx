@@ -4,9 +4,11 @@ import EventCard from "../components/EventCard";
 import { events } from "../data/events";
 import styles from "../css/EventsPage.module.css";
 import { useState } from "react";
+import { useSavedEvents } from "../hooks/useSavedEvents";
 export default function FavoritesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
+  const { savedIds, isSaved, toggleSaved, isLoaded } = useSavedEvents();
 
   const submitQuery = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevents page refresh
@@ -14,11 +16,13 @@ export default function FavoritesPage() {
     setSubmittedQuery(searchQuery.trim());
   };
 
+  const savedEvents = events.filter((event) => savedIds.includes(event.id));
+
   const filteredEvents = submittedQuery
-    ? events.filter((event) =>
+    ? savedEvents.filter((event) =>
         event.title.toLowerCase().startsWith(submittedQuery.toLowerCase())
       )
-    : events;
+    : savedEvents;
 
   return (
     <div className={styles.page}>
@@ -54,11 +58,21 @@ export default function FavoritesPage() {
         </form>
       </div>
       <div className={styles.gridSection}>
-        <div className={styles.grid}>
-          {filteredEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
-        </div>
+        {isLoaded && filteredEvents.length === 0 ? (
+          <p>No saved events yet.</p>
+        ) : (
+          <div className={styles.grid}>
+            {isLoaded &&
+              filteredEvents.map((event) => (
+                <EventCard
+                  key={event.id}
+                  event={event}
+                  isSaved={isSaved(event.id)}
+                  onToggleSave={toggleSaved}
+                />
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );

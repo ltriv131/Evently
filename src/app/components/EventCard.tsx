@@ -1,9 +1,18 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import type { EventInfo } from "../types/event";
 import styles from "../css/EventCard.module.css";
 
-export default function EventCard({ event }: { event: EventInfo }) {
+export default function EventCard({
+  event,
+  isSaved,
+  onToggleSave,
+}: {
+  event: EventInfo;
+  isSaved: boolean;
+  onToggleSave: (id: string) => void;
+}) {
   const {
     id,
     image,
@@ -24,10 +33,19 @@ export default function EventCard({ event }: { event: EventInfo }) {
         <img className={styles.image} src={image} alt={imageAlt} />
         <button
           type="button"
-          className={styles.saveButton}
-          aria-label={`Save ${title}`}
+          className={`${styles.saveButton} ${
+            isSaved ? styles.saveButtonActive : ""
+          }`}
+          aria-pressed={isSaved}
+          aria-label={isSaved ? `Remove ${title} from saved` : `Save ${title}`}
+          onClick={() => onToggleSave(id)}
         >
-          <Image src="/icons/bookmark.svg" alt="" width={18} height={18} />
+          <Image
+            src={isSaved ? "/icons/bookmark-filled.svg" : "/icons/bookmark.svg"}
+            alt=""
+            width={18}
+            height={18}
+          />
         </button>
       </div>
       <div className={styles.body}>
