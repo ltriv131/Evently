@@ -2,6 +2,7 @@ import { Router } from "express";
 import { FieldPath} from "firebase-admin/firestore";
 import { db, addEvent } from "../firestore";
 import type { EventInfo } from "../../src/app/types/event";
+import { uploadImageToCloudinary } from "../../src/app/cloudinary/cloudinary";
 
 const DEFAULT_LIMIT = 6;
 const MAX_LIMIT = 24;
@@ -72,6 +73,12 @@ eventsRouter.get("/", async (req, res) => {
 eventsRouter.post("/", async (req, res) => {
   try {
     const eventToAdd = req.body.event;
+    const imageDataUri = req.body.imageDataUri;
+
+    if (imageDataUri) {
+      eventToAdd.image = await uploadImageToCloudinary(imageDataUri);
+    }
+
     const createdEvent = await addEvent(eventToAdd);
     res.status(201).json({ event: createdEvent });
 

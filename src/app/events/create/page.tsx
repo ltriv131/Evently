@@ -1,10 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import EventCard from "../../components/EventCard";
 import type { EventInfo } from "../../types/event";
 import styles from "../../css/CreateEventPage.module.css";
+import { useRouter } from "next/navigation";
+
+function fileToDataUri(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
 type EventDraft = Omit<EventInfo, "id">;
 
@@ -20,9 +30,11 @@ const EMPTY_DRAFT: EventDraft = {
 };
 
 export default function CreateEventPage() {
+  const router = useRouter();
   const [draft, setDraft] = useState<EventDraft>(EMPTY_DRAFT);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
   function updateField<K extends keyof EventDraft>(field: K, value: string) {
     setDraft((prev) => ({ ...prev, [field]: value }));
@@ -42,9 +54,36 @@ export default function CreateEventPage() {
     setImageFile(file);
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function createEvent(event: EventDraft) {
+    const eventToSubmit = { ...event };
+    let imageDataUri: string | undefined;
+
+    if (imageFile) {
+      imageDataUri = await fileToDataUri(imageFile);
+    } else {
+      eventToSubmit.image = "/images/events/woodturning-at-soot-workshop.jpg"; // Use a default image if none is provided
+    }
+
+    fetch("/api/events", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ event: eventToSubmit, imageDataUri }),
+    }).then((res) => {
+      if (!res.ok) {
+        console.error("Failed to create event");
+        setSubmissionSuccess(false);
+      } else {
+        console.log("Event created successfully");
+        setSubmissionSuccess(true);
+        router.push("/events/create/success");
+      }});
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(draft, imageFile);
+    await createEvent(draft);
   }
 
   const previewEvent: EventInfo = {
