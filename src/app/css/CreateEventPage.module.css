@@ -1,0 +1,282 @@
+.page {
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+  width: 100%;
+  background-color: #e9e6e7;
+  padding: 80px 80px 120px;
+}
+
+.formColumn {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 40px;
+  min-width: 0;
+  max-width: 720px;
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.breadcrumbLink {
+  color: #6b7c98;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.breadcrumbDot {
+  width: 3px;
+  height: 3px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: #ab978c;
+}
+
+.breadcrumbCurrent {
+  color: #ab978c;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.title {
+  margin: 0;
+  color: #5e5653;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.28px;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 720px;
+  color: #7b7f8a;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.fieldRow {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.fieldHalf {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.label {
+  width: 100%;
+  color: #5e5653;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(171, 151, 140, 0.32);
+  border-radius: 4px;
+  background-color: #fff;
+  color: #5e5653;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  outline: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #7b7f8a;
+}
+
+.textarea {
+  height: 140px;
+  resize: vertical;
+}
+
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 200px;
+  padding: 32px;
+  border: 1px dashed rgba(171, 151, 140, 0.55);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.48);
+  cursor: pointer;
+}
+
+.uploadIconCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background-color: rgba(171, 151, 140, 0.12);
+}
+
+.uploadText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.uploadPrimaryText {
+  margin: 0;
+  color: #5e5653;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.uploadSecondaryText {
+  margin: 0;
+  color: #7b7f8a;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.selectedFileText {
+  margin: 0;
+  color: #5e5653;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fileError {
+  margin: 0;
+  color: #b3261e;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.hiddenFileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding-top: 16px;
+}
+
+.primaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  border: 1px solid #5e5653;
+  border-radius: 4px;
+  background-color: #5e5653;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.secondaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  border: 1px solid rgba(171, 151, 140, 0.55);
+  border-radius: 4px;
+  background-color: transparent;
+  color: #5e5653;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.previewColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  gap: 24px;
+  width: 400px;
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.previewLabel {
+  color: #6b7c98;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.previewCaption {
+  margin: 0;
+  color: #7b7f8a;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}

@@ -24,8 +24,7 @@ export function useInfiniteEvents() {
         : "";
       const res = await fetch(`/api/events${query}`);
       if (!res.ok) throw new Error("Failed to fetch events");
-      const data: { events: EventInfo[]; nextCursor: string | null } =
-        await res.json();
+      const data: { events: EventInfo[]; nextCursor: string | null } = await res.json();
 
       setEvents((prev) => {
         const existingIds = new Set(prev.map((event) => event.id));

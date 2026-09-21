@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { FieldPath } from "firebase-admin/firestore";
-import { db } from "../firestore";
+import { FieldPath} from "firebase-admin/firestore";
+import { db, addEvent } from "../firestore";
 import type { EventInfo } from "../../src/app/types/event";
 
 const DEFAULT_LIMIT = 6;
@@ -68,3 +68,17 @@ eventsRouter.get("/", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch events" });
   }
 });
+
+eventsRouter.post("/", async (req, res) => {
+  try {
+    const eventToAdd = req.body.event;
+    const createdEvent = await addEvent(eventToAdd);
+    res.status(201).json({ event: createdEvent });
+
+  } catch (error) {
+    console.error("Failed to create event in Firestore", error);
+    res.status(500).json({ error: "Failed to create event" });
+  }
+  return;
+});
+

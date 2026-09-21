@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import EventCard from "../components/EventCard";
 import styles from "../css/EventsPage.module.css";
 import { useSavedEvents } from "../hooks/useSavedEvents";
@@ -59,6 +60,9 @@ export default function EventsPage() {
         </form>
       </div>
       <div className={styles.gridSection}>
+        <Link href="/events/create" className={styles.createEventButton}>
+          Create Event
+        </Link>
         { isSearching && searchResults.length === 0 && !searchLoading && <h1>No events found</h1> }
         <div className={styles.grid}>
           {displayedEvents.map((event) => (

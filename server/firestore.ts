@@ -1,5 +1,6 @@
+import { EventInfo } from "@/app/types/event";
 import { cert, getApps, initializeApp } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore} from "firebase-admin/firestore";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
@@ -14,3 +15,8 @@ if (!getApps().length) {
 }
 
 export const db = getFirestore();
+
+export const addEvent = async (event: Omit<EventInfo, "id">) => {
+  const docRef = await db.collection("Events").add(event);
+  return { id: docRef.id, ...event };
+}
