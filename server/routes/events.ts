@@ -17,6 +17,17 @@ export const eventsRouter = Router();
 eventsRouter.get("/", async (req, res) => {
   try {
     const idsParam = req.query.ids;
+    const queryParam = req.query.query;
+
+    if (typeof queryParam === "string" && queryParam.length > 0) {
+      const querySnapshot = await eventsCollection
+        .where("title", ">=", queryParam)
+        .where("title", "<=", queryParam + "\uf8ff")
+        .get();
+      const matched = querySnapshot.docs.map(toEventInfo);
+      res.json({ events: matched });
+      return;
+    }
 
     if (typeof idsParam === "string" && idsParam.length > 0) {
       const ids = idsParam.split(",");

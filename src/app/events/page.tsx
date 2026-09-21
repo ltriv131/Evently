@@ -4,10 +4,32 @@ import EventCard from "../components/EventCard";
 import styles from "../css/EventsPage.module.css";
 import { useSavedEvents } from "../hooks/useSavedEvents";
 import { useInfiniteEvents } from "../hooks/useInfiniteEvents";
+import { useEventSearch } from "../hooks/useEventSearch";
+import { useState } from "react";
 
 export default function EventsPage() {
   const { isSaved, toggleSaved } = useSavedEvents();
-  const { events, isLoading, error, sentinelRef } = useInfiniteEvents();
+  const {
+    events: infiniteEvents,
+    isLoading: infiniteLoading,
+    error: infiniteError,
+    sentinelRef,
+  } = useInfiniteEvents();
+  const [query, setQuery] = useState("");
+  const [submittedQuery, setSubmittedQuery] = useState("");
+  const {
+    events: searchResults,
+    isLoading: searchLoading,
+    error: searchError,
+  } = useEventSearch(submittedQuery);
+
+  function handleSearchSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmittedQuery(query);
+  }
+
+  const isSearching = submittedQuery.length > 0;
+  const displayedEvents = isSearching ? searchResults : infiniteEvents;
 
   return (
     <div className={styles.page}>
@@ -18,7 +40,7 @@ export default function EventsPage() {
             Explore upcoming talks, workshops, and studio gatherings.
           </p>
         </div>
-        <div className={styles.searchBar}>
+        <form className={styles.searchBar} onSubmit={handleSearchSubmit}>
           <Image
             className={styles.searchIcon}
             src="/icons/search.svg"
@@ -31,12 +53,15 @@ export default function EventsPage() {
             type="search"
             placeholder="Search events"
             aria-label="Search events"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
-        </div>
+        </form>
       </div>
       <div className={styles.gridSection}>
+        { isSearching && searchResults.length === 0 && !searchLoading && <h1>No events found</h1> }
         <div className={styles.grid}>
-          {events.map((event) => (
+          {displayedEvents.map((event) => (
             <EventCard
               key={event.id}
               event={event}
@@ -45,9 +70,18 @@ export default function EventsPage() {
             />
           ))}
         </div>
-        <div ref={sentinelRef} />
-        {isLoading && <p>Loading more events…</p>}
-        {error && <p>{error}</p>}
+        {isSearching ? (
+          <>
+            {searchLoading && <p>Searching…</p>}
+            {searchError && <p>{searchError}</p>}
+          </>
+        ) : (
+          <>
+            <div ref={sentinelRef} />
+            {infiniteLoading && <p>Loading more events…</p>}
+            {infiniteError && <p>{infiniteError}</p>}
+          </>
+        )}
       </div>
     </div>
   );

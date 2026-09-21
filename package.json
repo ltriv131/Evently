@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "server": "tsx watch server/index.ts",
-    "seed": "tsx server/seed.ts"
+    "seed": "tsx server/seed.ts",
+    "seed:extra": "tsx server/seedExtra.ts"
   },
   "dependencies": {
     "express": "^5.2.1",

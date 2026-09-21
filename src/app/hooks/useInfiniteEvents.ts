@@ -10,7 +10,7 @@ export function useInfiniteEvents() {
   const cursorRef = useRef<string | null>(null);
   const hasMoreRef = useRef(true);
   const isLoadingRef = useRef(false);
-  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   const loadMore = useCallback(async () => {
     if (isLoadingRef.current || !hasMoreRef.current) return;
@@ -27,7 +27,10 @@ export function useInfiniteEvents() {
       const data: { events: EventInfo[]; nextCursor: string | null } =
         await res.json();
 
-      setEvents((prev) => [...prev, ...data.events]);
+      setEvents((prev) => {
+        const existingIds = new Set(prev.map((event) => event.id));
+        return [...prev, ...data.events.filter((event) => !existingIds.has(event.id))];
+      });
       cursorRef.current = data.nextCursor;
       hasMoreRef.current = data.nextCursor !== null;
     } catch {
@@ -42,17 +45,21 @@ export function useInfiniteEvents() {
     loadMore();
   }, [loadMore]);
 
-  useEffect(() => {
-    const node = sentinelRef.current;
-    if (!node) return;
+  const sentinelRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      observerRef.current?.disconnect();
+      observerRef.current = null;
 
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) loadMore();
-    });
-    observer.observe(node);
+      if (!node) return;
 
-    return () => observer.disconnect();
-  }, [loadMore]);
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) loadMore();
+      });
+      observer.observe(node);
+      observerRef.current = observer;
+    },
+    [loadMore]
+  );
 
   return { events, isLoading, error, sentinelRef };
 }
