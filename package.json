@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:all": "concurrently -n next,server -c blue,green \"npm:dev\" \"npm:server\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -12,9 +13,11 @@
     "seed:extra": "tsx server/seedExtra.ts"
   },
   "dependencies": {
+    "cloudinary": "^2.11.0",
     "express": "^5.2.1",
     "firebase-admin": "^14.4.0",
     "next": "16.3.5",
+    "next-cloudinary": "^6.19.3",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
@@ -25,6 +28,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "concurrently": "^9.1.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
     "tailwindcss": "^4",

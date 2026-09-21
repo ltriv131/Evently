@@ -18,8 +18,9 @@ function fileToDataUri(file: File): Promise<string> {
 
 type EventDraft = Omit<EventInfo, "id">;
 
+const DEFAULT_IMAGE = "/images/events/woodturning-at-soot-workshop.jpg";
 const EMPTY_DRAFT: EventDraft = {
-  image: "",
+  image: DEFAULT_IMAGE,
   imageAlt: "",
   date: "",
   category: "",
@@ -35,6 +36,8 @@ export default function CreateEventPage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
+    const [temporaryImageSource, setTemporaryImageSource] = useState<string | null>(null);
+  
 
   function updateField<K extends keyof EventDraft>(field: K, value: string) {
     setDraft((prev) => ({ ...prev, [field]: value }));
@@ -49,7 +52,8 @@ export default function CreateEventPage() {
       e.target.value = "";
       return;
     }
-
+    setDraft((prev) => ({...prev, image: file ? URL.createObjectURL(file) : DEFAULT_IMAGE }));
+    //setTemporaryImageSource(file === null ? DEFAULT_IMAGE : URL.createObjectURL(file));
     setFileError(null);
     setImageFile(file);
   }
@@ -61,24 +65,32 @@ export default function CreateEventPage() {
     if (imageFile) {
       imageDataUri = await fileToDataUri(imageFile);
     } else {
-      eventToSubmit.image = "/images/events/woodturning-at-soot-workshop.jpg"; // Use a default image if none is provided
+      eventToSubmit.image = DEFAULT_IMAGE;
     }
 
-    fetch("/api/events", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ event: eventToSubmit, imageDataUri }),
-    }).then((res) => {
+    try {
+      const res = await fetch("/api/events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ event: eventToSubmit, imageDataUri }),
+      });
+
       if (!res.ok) {
         console.error("Failed to create event");
         setSubmissionSuccess(false);
-      } else {
-        console.log("Event created successfully");
-        setSubmissionSuccess(true);
-        router.push("/events/create/success");
-      }});
+        return;
+      }
+
+      console.log("Event created successfully");
+      setSubmissionSuccess(true);
+      const { event: createdEvent } = await res.json();
+      router.push(`/events/create/${createdEvent.id}/success`);
+    } catch (error) {
+      console.error("Failed to create event", error);
+      setSubmissionSuccess(false);
+    }
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

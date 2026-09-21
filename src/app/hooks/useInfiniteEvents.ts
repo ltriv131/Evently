@@ -6,7 +6,6 @@ export function useInfiniteEvents() {
   const [events, setEvents] = useState<EventInfo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const cursorRef = useRef<string | null>(null);
   const hasMoreRef = useRef(true);
   const isLoadingRef = useRef(false);
