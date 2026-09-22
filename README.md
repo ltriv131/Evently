@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Evently
 
-## Getting Started
+This is my submission for Full Stack at Brown, Evently. This is an event registration website, where users can view, register for, save, and create events.
 
-First, run the development server:
+The framework used for this project is Next.js with React. This project strengthened my understanding of states, props, and a variety of React hooks. The backend is an Express.js server, which is the API endpoint for event requests. This server connects to a firestore database which stores the event data, and also connects to a cloudinary database which stores the images for the events. The backend server sits on the same host as the Next.js server, and uses a reverse proxy layer to distribute api requests to the backend server without CORS.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Running
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Clone this repository, and add the secrets folder which you should have to the root folder of the project (Should be Evently -> secrets).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Enter the project
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```
+   cd ./Evently
+   ```
 
-## Learn More
+2. Install the packages
 
-To learn more about Next.js, take a look at the following resources:
+   ```
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Run the project (NOTE: You must run both the backend server and the Next.js dev server or else the events will not show up. Do not just run npm run dev!)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```
+   npm run dev:all
+   ```
 
-## Deploy on Vercel
+4. Go to `http://localhost:3000/events`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The website should load!
