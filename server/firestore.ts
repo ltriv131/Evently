@@ -20,3 +20,9 @@ export const addEvent = async (event: Omit<EventInfo, "id">) => {
   const docRef = await db.collection("Events").add(event);
   return { id: docRef.id, ...event };
 }
+
+export const editEvent = async (id: string, eventEdits: Partial<EventInfo>) => {
+  const docRef = db.collection("Events").doc(id);
+  await docRef.update(eventEdits);
+  
+}

@@ -9,4 +9,5 @@ export interface EventInfo {
   time: string;
   description: string;
   cta?: string;
+  registeredPeople: []
 }

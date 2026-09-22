@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { FieldPath} from "firebase-admin/firestore";
-import { db, addEvent } from "../firestore";
+import { db, addEvent, editEvent } from "../firestore";
 import type { EventInfo } from "../../src/app/types/event";
 import { uploadImageToCloudinary } from "../../src/app/cloudinary/cloudinary";
 
@@ -88,4 +88,17 @@ eventsRouter.post("/", async (req, res) => {
   }
   return;
 });
+
+eventsRouter.post("/edit",async (req, res) => {
+  try {
+    const eventData = req.body.eventEdits;
+    const {id, ...eventEdits} = eventData;
+    await editEvent(id, eventEdits);
+    res.status(204);
+  } catch (error) {
+    console.error("Failed to update event")
+    res.status(500).json({error: "Failed to create event"})
+  }
+  return;
+})
 

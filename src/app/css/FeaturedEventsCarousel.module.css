@@ -1,0 +1,101 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 120px 80px 80px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.eyebrowNumber {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #6b7c98;
+  white-space: nowrap;
+}
+
+.eyebrowLine {
+  width: 24px;
+  height: 1px;
+  flex-shrink: 0;
+  background-color: rgba(171, 151, 140, 0.55);
+}
+
+.eyebrowLabel {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #5e5653;
+  white-space: nowrap;
+}
+
+.heading {
+  width: 100%;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -1.28px;
+  color: #5e5653;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border: none;
+  border-radius: 100px;
+  background-color: #d8d3d1;
+  cursor: pointer;
+}
+
+.navButton img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.paginationDot {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: #d8d3d1;
+  cursor: pointer;
+}
+
+.paginationDotActive {
+  background-color: #5e5653;
+}
