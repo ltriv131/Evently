@@ -1,0 +1,47 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  background-color: #e9e6e7;
+  padding: 80px;
+}
+
+.title {
+  margin: 0 0 32px;
+  color: #5e5653;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.28px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.label {
+  color: #ab978c;
+}
+
+.value {
+  color: #5e5653;
+}
+
+.value:is(a) {
+  color: #6b7c98;
+  text-decoration: none;
+}
