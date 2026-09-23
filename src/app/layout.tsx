@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning>
         <Navbar />
         <main className={styles.main}>{children}</main>
         <Footer />
