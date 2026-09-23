@@ -38,7 +38,7 @@ export default function EventsPage() {
         <div className={styles.headerCopy}>
           <h1 className={styles.title}>Events</h1>
           <p className={styles.subtitle}>
-            Explore upcoming talks, workshops, and studio gatherings.
+            Explore upcoming club events.
           </p>
         </div>
         <form className={styles.searchBar} onSubmit={handleSearchSubmit}>
