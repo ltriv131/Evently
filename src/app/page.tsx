@@ -1,14 +1,15 @@
 "use client";
 import { events } from "./data/events";
 import FeaturedEventsCarousel from "./components/FeaturedEventsCarousel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useEventsByIds } from "./hooks/useEventsByIds";
 
 // The events shown in the hero carousel, in slide order.
-const featuredEvents = [events[4], events[0], events[1]];
+const featuredEventIds = ["GUOf8d7cm7AswSPq0VMq", "ZnQm0zQwdKEFDhn7u6AS", "kTXw6dpn0pmVirvTXbfp"];
 
 export default function Home() {
-  // TODO: replace with real carousel state (e.g. useState) and wire up
-  // navigation - this is intentionally left as a no-op stub.
+  const { events: featuredEvents, isLoading, error } = useEventsByIds(featuredEventIds);
+  
   const [activeIndex, setActiveIndex]=useState(0)
 
   function handlePrev() {
