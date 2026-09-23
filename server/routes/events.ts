@@ -89,15 +89,15 @@ eventsRouter.post("/", async (req, res) => {
   return;
 });
 
-eventsRouter.post("/edit",async (req, res) => {
+eventsRouter.post("/edit/",async (req, res) => {
   try {
     const eventData = req.body.eventEdits;
     const {id, ...eventEdits} = eventData;
     await editEvent(id, eventEdits);
-    res.status(204);
+    res.status(204).send();
   } catch (error) {
     console.error("Failed to update event")
-    res.status(500).json({error: "Failed to create event"})
+    res.status(500).json({error: "Failed to update event"}).send()
   }
   return;
 })

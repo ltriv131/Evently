@@ -1,0 +1,223 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: rgba(94, 86, 83, 0.55);
+  z-index: 50;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: clip;
+  width: 100%;
+  max-width: 560px;
+  border-radius: 8px;
+  background-color: #d8d3d1;
+  box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.25);
+}
+
+.cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  width: 100%;
+  height: 180px;
+  padding: 32px;
+}
+
+.coverImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coverTint {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(94, 86, 83, 0.65);
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  border-radius: 999px;
+  background-color: rgba(233, 230, 231, 0.2);
+  cursor: pointer;
+}
+
+.closeButton img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.coverDetails {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.coverEyebrow {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #e9e6e7;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.coverTitle {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.coverMeta {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #e9e6e7;
+  white-space: nowrap;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  padding: 32px;
+}
+
+.intro {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #5e5653;
+}
+
+.status {
+  margin: 0;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.statusSuccess {
+  border-color: rgba(107, 124, 152, 0.55);
+  background-color: rgba(107, 124, 152, 0.1);
+  color: #6b7c98;
+}
+
+.statusError {
+  border-color: rgba(179, 38, 30, 0.3);
+  background-color: rgba(179, 38, 30, 0.08);
+  color: #b3261e;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.nameRow {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.field {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #5e5653;
+  white-space: nowrap;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(171, 151, 140, 0.32);
+  border-radius: 4px;
+  background-color: #fff;
+  color: #5e5653;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  font-family: inherit;
+}
+
+.input::placeholder {
+  color: rgba(94, 86, 83, 0.55);
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(171, 151, 140, 0.55);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cancelButton {
+  padding: 12px 24px;
+  border: 1px solid rgba(171, 151, 140, 0.55);
+  border-radius: 4px;
+  background-color: transparent;
+  color: #5e5653;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.submitButton {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+  background-color: #6b7c98;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.05);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+}

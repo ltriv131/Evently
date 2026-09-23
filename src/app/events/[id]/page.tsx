@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { EventInfo } from "../../types/event";
+import EventRegistration from "../../components/EventRegistration";
 import styles from "../../css/EventDetailPage.module.css";
 
 async function getEvent(id: string): Promise<EventInfo | null> {
@@ -48,9 +49,7 @@ export default async function EventDetailPage(
           <p>{event.time}</p>
         </div>
         <p className={styles.description}>{event.description}</p>
-        <a className={styles.registerButton} href="#">
-          Register
-        </a>
+        <EventRegistration event={event} />
       </div>
     </div>
   );

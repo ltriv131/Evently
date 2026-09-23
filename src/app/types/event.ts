@@ -1,3 +1,4 @@
+import { User } from "./user"
 export interface EventInfo {
   id: string;
   image: string;
@@ -9,5 +10,5 @@ export interface EventInfo {
   time: string;
   description: string;
   cta?: string;
-  registeredPeople: []
+  registeredPeople: User[]
 }

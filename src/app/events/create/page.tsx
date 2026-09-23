@@ -28,6 +28,7 @@ const EMPTY_DRAFT: EventDraft = {
   location: "",
   time: "",
   description: "",
+  registeredPeople: []
 };
 
 export default function CreateEventPage() {
@@ -107,6 +108,7 @@ export default function CreateEventPage() {
     title: draft.title || "Your Event Title Here",
     location: draft.location || "Event Location",
     time: draft.time || "10:00 - 14:00",
+    registeredPeople: [],
     description:
       draft.description ||
       "The description of your gathering will update here as you compose your submission on the left.",
