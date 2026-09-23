@@ -25,7 +25,7 @@ export default function FeaturedEventsCarousel({
         <span className={styles.eyebrowLine} />
         <p className={styles.eyebrowLabel}>Featured Events</p>
       </div>
-      <p className={styles.heading}>Tactile architecture. Quietly curated.</p>
+      <p className={styles.heading}>All your clubs in one place</p>
       <div className={styles.carousel}>
         <div className={styles.controls}>
           <button

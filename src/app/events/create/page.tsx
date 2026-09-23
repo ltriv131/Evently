@@ -179,13 +179,13 @@ export default function CreateEventPage() {
           <div className={styles.fieldRow}>
             <div className={styles.fieldHalf}>
               <label className={styles.label} htmlFor="event-category">
-                Category
+                Club Name
               </label>
               <input
                 id="event-category"
                 className={styles.input}
                 type="text"
-                placeholder="Workshop, Studio Visit, Talk, etc."
+                placeholder="Full Stack at Brown"
                 value={draft.category}
                 onChange={(e) => updateField("category", e.target.value)}
               />
@@ -277,8 +277,7 @@ export default function CreateEventPage() {
           onToggleSave={() => {}}
         />
         <p className={styles.previewCaption}>
-          This card will be visible in the Events Directory once approved by
-          studio coordinators.
+          This card will be visible in the Events Directory immediately upon successful submission.
         </p>
       </div>
     </div>

@@ -20,13 +20,12 @@ export default async function EventCreationSuccessPage(
               width={16}
               height={16}
             />
-            <p className={styles.badgeText}>Submission Received</p>
+            <p className={styles.badgeText}>Event Created</p>
           </div>
           <h1 className={styles.title}>Your event is on the horizon.</h1>
           <p className={styles.subtitle}>
-            Thank you for contributing to the collective. Your workshop
-            proposal has been successfully submitted and is now awaiting
-            coordinator approval.
+            Thanks for creating an event! Your event should now be visible
+            on the events page.
           </p>
         </div>
 
@@ -34,16 +33,10 @@ export default async function EventCreationSuccessPage(
           <p className={styles.guidelinesTitle}>What happens next?</p>
           <div className={styles.guidelinesList}>
             <p className={styles.guidelinesItem}>
-              • Our studio coordinators will review your listing details
-              within 24 hours.
+              • View registrations on your account portal.
             </p>
             <p className={styles.guidelinesItem}>
-              • Once approved, it will be published to the public Events
-              Directory.
-            </p>
-            <p className={styles.guidelinesItem}>
-              • A confirmation email has been sent to you with edit links
-              and tracking details.
+              • A confirmation email has been sent to you.
             </p>
           </div>
         </div>
