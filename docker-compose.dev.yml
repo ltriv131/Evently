@@ -1,0 +1,37 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    environment:
+      - EXPRESS_API_URL=http://api:4000
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: npm run server
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: ["http", "--url=relieving-freeing-gray.ngrok-free.dev", "web:3000"]
+    env_file:
+      - ./secrets/.env
+    ports:
+      - "4040:4040"
+    depends_on:
+      - web

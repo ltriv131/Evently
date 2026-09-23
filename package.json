@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "server": "tsx watch server/index.ts",
+    "dev:docker": "docker compose -f docker-compose.dev.yml up --build",
+    "dev:docker:down": "docker compose -f docker-compose.dev.yml down",
     "seed": "tsx server/seed.ts",
     "seed:extra": "tsx server/seedExtra.ts"
   },
